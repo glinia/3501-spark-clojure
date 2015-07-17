@@ -1,6 +1,5 @@
 (ns elisabet.toggle
   (:gen-class
-   :init init
    :use elisabet.constants))
 
 (import edu.wpi.first.wpilibj.Timer)

@@ -3,6 +3,8 @@ Clojure code for a simple [FIRST FRC](http://www.usfirst.org/roboticsprograms/fr
 
 This should be the functional equivalent (ha _ha!_) of [the TURKEY code](https://github.com/glinia/3501-spark).
 
+The name `elisabet` originated from the song [Elisabet](https://www.youtube.com/watch?v=6ZxU9i5EWU4) by Emiliana Torrini.
+
 ### Setup
 
 Add the following to `~/.lein/profiles.clj`:
