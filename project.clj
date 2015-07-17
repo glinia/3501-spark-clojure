@@ -6,4 +6,6 @@
   :dependencies [[org.clojure/clojure "1.6.0"]]
   :main ^:skip-aot elisabet.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:aot :all}}
+  :resource-paths ["resources/*"])
+  ;:repositories {"frc" "https://usfirst.collab.net/gerrit/allwpilib"})
