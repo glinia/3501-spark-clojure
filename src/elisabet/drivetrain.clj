@@ -14,17 +14,14 @@
 
 (defn drive
   "Drive using input from joysticks."
-  [drivetrain forward twist]
+  [forward twist]
   (let [forward (filter-noise twist)
         twist (filter-noise twist)]
-    (.arcadeDrive drivetrain
-                  (* MAX_DRIVE_SPEED (adjust forward))
-                  (* MAX_DRIVE_SPEED (adjust twist))
-                  false)))
+    (.arcadeDrive drivetrain (scale forward) (scale twist) false)))
 
 (defn drive-raw
   "Drive using without any adjustment."
-  [drivetrain forward twist]
+  [forward twist]
   (.arcadeDrive drivetrain forward twist false))
 
 (defn stop
@@ -39,7 +36,12 @@
     0
     input))
 
+(defn- scale
+  "Scales and adjusts input."
+  [input]
+  (* MAX_DRIVE_SPEED (adjust input)))
+
 (defn- adjust
-  "Outputs the average of `x` and `sqrt(x)'"
+  "Outputs the average of `x` and `sqrt(x)`."
   [x]
   (/ (+ x (* (Math/signum x) (Math/sqrt (Math/abs x)))) 2))

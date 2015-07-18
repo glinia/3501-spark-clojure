@@ -1,6 +1,7 @@
 (ns elisabet.robot
   (:gen-class
-   :extends edu.wpi.first.wpilibj.IterativeRobot))
+   :extends edu.wpi.first.wpilibj.IterativeRobot
+   :use elisabet.constants))
 
 ;;; Gotta name FIRST uses in camelCase rather than snake-case cause Java
 
