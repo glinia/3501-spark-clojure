@@ -8,4 +8,3 @@
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}}
   :resource-paths ["resources/*"])
-  ;:repositories {"frc" "https://usfirst.collab.net/gerrit/allwpilib"})
