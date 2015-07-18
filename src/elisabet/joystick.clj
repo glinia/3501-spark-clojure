@@ -1,9 +1,8 @@
 (ns elisabet.joystick
   (:gen-class
    :extends edu.wpi.first.wpilibj.Joystick
-   :use elisabet.constants))
-
-(def toggle (new toggle)) ; make this somehow...
+   :use [elisabet.constants :as const]
+        [elisabet.toggle :as toggle]))
 
 (defn is-pov
   "Returns whether the POV is currently at the given location."
@@ -18,9 +17,9 @@
 (defn get-toggle-button
   "Returns whether the button is pressable AND if it's currently pressed."
   [button]
-  (let [pressed (and (get button) (not (has-time-left button)))]
+  (let [pressed (and (get button) (not (toggle/has-time-left button)))]
     (if pressed
-      (add-timeout button)))) ; what's going on with toggle?? AHH
+      (toggle/add-timeout button))))
 
 (defn get-timed-action
   "Check if there is time remaining in the button press timer."
