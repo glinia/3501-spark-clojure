@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# create jar file
+lein uberjar
+
+# copy it over
+scp ./target/elisabet-*.jar lvuser@roboRIO-3501.local:/home/lvuser/FRCUserProgram.jar
