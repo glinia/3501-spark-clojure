@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# create jar file
+# rm old uberjar
+rm -rf ./target/uberjar
+
+# create new uberjar
 lein uberjar
 
 # copy it over
-scp ./target/elisabet-*.jar lvuser@roboRIO-3501.local:/home/lvuser/FRCUserProgram.jar
+scp ./target/uberjar/elisabet-*.jar lvuser@roboRIO-3501.local:/home/lvuser/FRCUserProgram.jar
