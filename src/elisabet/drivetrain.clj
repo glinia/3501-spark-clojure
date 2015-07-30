@@ -18,7 +18,6 @@
    (CANJaguar. const/REAR_LEFT_ADDRESS)
    (CANJaguar. const/REAR_RIGHT_ADDRESS)))
 
-
 (defn drive
   "Drive using input from joysticks."
   [base forward twist]
