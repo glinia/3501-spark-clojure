@@ -5,17 +5,7 @@
 
 (import edu.wpi.first.wpilibj.Joystick)
 
-(defn left-stick
-  "Makes a left joystick."
-  []
-  (make-joystick const/LEFT_JOYSTICK_PORT))
-
-(defn right-stick
-  "Makes a right joystick."
-  []
-  (make-joystick const/RIGHT_JOYSTICK_PORT))
-
-(defn- make-joystick
+(defn make-joystick
   "Makes a joystick."
   [port]
   (Joystick. port))

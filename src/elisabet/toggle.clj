@@ -3,8 +3,7 @@
    :name toggle
    :state state
    :init init
-   :methods [;[insertTimeout [Number edu.wpi.first.wpilibj.Timer] void]
-             [addTimeout [Number] void]
+   :methods [[addTimeout [Number] void]
              [getTimeout [Number] edu.wpi.first.wpilibj.Timer]
              [hasTimeLeft [Number] Boolean]
              [hasTimeLeft [Number Number] Boolean]]
