@@ -33,8 +33,7 @@
 (defn- buttons-pressed
   "Perform actions based on which buttons are pressed."
   []
-
-  (if (= claw/state (const/State :FREE))
+  (if (= claw/state (:FREE const/State))
     (if (joystick/get (left-stick) 1)
       (claw/close)
       (claw/open)))
@@ -44,23 +43,16 @@
 
 ;;; joystick nonsense
 
-(def left (toggle.))
-(def right (toggle.))
+(def left-toggle  (toggle.))
+(def right-toggle (toggle.))
+
+(def left-stick  (joystick/make-joystick const/LEFT_JOYSTICK_PORT))
+(def right-stick (joystick/make-joystick const/RIGHT_JOYSTICK_PORT))
 
 (defmacro left-stick-timer
   []
-  (conj (left-stick) left-toggle))
+  '[left-stick left-toggle])
 
 (defmacro right-stick-timer
   []
-  (conj (right-stick) right-toggle))
-
-(defn- left-stick
-  "Makes a left joystick."
-  []
-  (joystick/make-joystick const/LEFT_JOYSTICK_PORT))
-
-(defn- right-stick
-  "Makes a right joystick."
-  []
-  (joystick/make-joystick const/RIGHT_JOYSTICK_PORT))
+  '[right-stick right-toggle])

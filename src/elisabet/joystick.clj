@@ -22,15 +22,15 @@
 
 (defn get-toggle-button
   "Returns whether the button is pressable AND if it's currently pressed."
-  [joystick toggle button]
-  (let [pressed (and (get button) (not (.hasTimeLeft toggle button)))]
+  [[joystick toggle] button]
+  (let [pressed (and (get joystick button) (not (.hasTimeLeft toggle button)))]
     (if pressed
       (.addTimeout toggle button))))
 
 (defn get-timed-action
   "Check if there is time remaining in the button press timer."
-  [joystick toggle button secs]
-  (get-toggle-button joystick toggle button)
+  [[joystick toggle] button secs]
+  (get-toggle-button [joystick toggle] button)
   (.hasTimeLeft toggle button secs))
 
 (defn get-one
@@ -40,5 +40,5 @@
 
 (defn get-one-timed
   "Returns true if at least one of the buttons is on its timer."
-  [joystick toggle secs & buttons]
-  (some #(get-timed-action joystick toggle % secs) buttons))
+  [[joystick toggle] secs & buttons]
+  (some #(get-timed-action [joystick toggle] % secs) buttons))
