@@ -1,43 +1,54 @@
 (ns elisabet.joystick
   (:gen-class
-   :name joystick
-   :state state
-   :init init
-   :extends edu.wpi.first.wpilibj.Joystick
-   :constructors {[Integer] [Integer]}
-   :use elisabet.toggle))
+   :name joystick))
+(:require [elisabet.constants :as const])
 
-(def toggle (elisabet.toggle.))
+(import edu.wpi.first.wpilibj.Joystick)
+
+(defn left-stick
+  "Makes a left joystick."
+  []
+  (make-joystick const/LEFT_JOYSTICK_PORT))
+
+(defn right-stick
+  "Makes a right joystick."
+  []
+  (make-joystick const/RIGHT_JOYSTICK_PORT))
+
+(defn- make-joystick
+  "Makes a joystick."
+  [port]
+  (Joystick. port))
 
 (defn is-pov
   "Returns whether the POV is currently at the given location."
-  [direction]
-  (= direction (.getPOV this)))
+  [joystick direction]
+  (= direction (.getPOV joystick)))
 
 (defn get
   "Returns whether the button is currently pressed."
-  [button]
-  (.getRawButton this button))
+  [joystick button]
+  (.getRawButton joystick button))
 
 (defn get-toggle-button
   "Returns whether the button is pressable AND if it's currently pressed."
-  [button]
-  (let [pressed (and (get button) (not (toggle/has-time-left button)))]
+  [joystick toggle button]
+  (let [pressed (and (get button) (not (.hasTimeLeft toggle button)))]
     (if pressed
-      (toggle/add-timeout button))))
+      (.addTimeout toggle button))))
 
 (defn get-timed-action
   "Check if there is time remaining in the button press timer."
-  [button secs]
-  (get-toggle-button button)
-  (has-time-left button secs))
+  [joystick toggle button secs]
+  (get-toggle-button joystick toggle button)
+  (.hasTimeLeft toggle button secs))
 
 (defn get-one
   "Returns true if at least one of the buttons is pressed."
-  [& buttons]
-  (some get buttons))
+  [joystick & buttons]
+  (some get joystick buttons))
 
 (defn get-one-timed
   "Returns true if at least one of the buttons is on its timer."
-  [secs & buttons]
-  (some #(get-timed-action % secs) buttons))
+  [joystick toggle secs & buttons]
+  (some #(get-timed-action joystick toggle % secs) buttons))
