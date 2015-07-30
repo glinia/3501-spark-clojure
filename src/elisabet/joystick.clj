@@ -1,13 +1,18 @@
 (ns elisabet.joystick
   (:gen-class
+   :name joystick
+   :state state
+   :init init
    :extends edu.wpi.first.wpilibj.Joystick
-   :use [elisabet.constants :as const]
-        [elisabet.toggle :as toggle]))
+   :constructors {[Integer] [Integer]}
+   :use elisabet.toggle))
+
+(def toggle (elisabet.toggle.))
 
 (defn is-pov
   "Returns whether the POV is currently at the given location."
   [direction]
-  (= direction (.getPov this)))
+  (= direction (.getPOV this)))
 
 (defn get
   "Returns whether the button is currently pressed."

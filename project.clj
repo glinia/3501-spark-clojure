@@ -4,7 +4,7 @@
   :license {:name "GNU GPL v3"
             :url "https://www.gnu.org/licenses/gpl-3.0.en.html"}
   :dependencies [[org.clojure/clojure "1.6.0"]]
-  :main ^:skip-aot elisabet.core
+  :aot [elisabet.toggle]
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}}
   :resource-paths ["resources/*"])

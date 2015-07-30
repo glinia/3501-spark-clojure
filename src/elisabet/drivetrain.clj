@@ -1,16 +1,16 @@
 (ns elisabet.drivetrain
   (:gen-class
-   :use elisabet.constants))
+   :use [elisabet.constants :as const]))
 
 (import (edu.wpi.first.wpilibj CANJaguar
                                RobotDrive))
 
 
 (def drivetrain RobotDrive.
-  (CANJaguar. FRONT_LEFT_ADDRESS)
-  (CANJaguar. FRONT_RIGHT_ADDRESS)
-  (CANJaguar. REAR_LEFT_ADDRESS)
-  (CANJaugar. REAR_RIGHT_ADDRESS))
+  (CANJaguar. const/FRONT_LEFT_ADDRESS)
+  (CANJaguar. const/FRONT_RIGHT_ADDRESS)
+  (CANJaguar. const/REAR_LEFT_ADDRESS)
+  (CANJaugar. const/REAR_RIGHT_ADDRESS))
 
 (defn drive
   "Drive using input from joysticks."
@@ -32,14 +32,14 @@
 (defn- filter-noise
   "Ensures that the input is large enough to be recognized."
   [input]
-  (if (< (Math/abs input) MIN_DRIVE_JOYSTICK_INPUT)
+  (if (< (Math/abs input) const/MIN_DRIVE_JOYSTICK_INPUT)
     0
     input))
 
 (defn- scale
   "Scales and adjusts input."
   [input]
-  (* MAX_DRIVE_SPEED (adjust input)))
+  (* const/MAX_DRIVE_SPEED (adjust input)))
 
 (defn- adjust
   "Outputs the average of `x` and `sqrt(x)`."

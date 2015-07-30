@@ -1,41 +1,42 @@
 (ns elisabet.toggle
   (:gen-class
+   :name toggle
    :state state
-   :init init)
+   :init init
+   :methods [[insertTimeout [Number edu.wpi.first.wpilibj.Timer] void]
+             [addTimeout [Number] void]
+             [getTimeout [Number] edu.wpi.first.wpilibj.Timer]
+             [hasTimeLeft [Number] Boolean]
+             [hasTimeLeft [Number Number] Boolean]]
+   :constructors {[] []})
   (:require [elisabet.constants :as const]))
 
 (import edu.wpi.first.wpilibj.Timer)
 
-
-(defn- init
+(defn -init
   []
   [[] (atom {})])
 
-(defn- timeouts
-  [this]
-  (.state this))
+(defn -insertTimeout
+  [this button timer]
+  (reset! (.state this) (merge (.state this) {button timer})))
 
-(defn- add-timeout
-  "Adds a k-v button-timer pair to a map"
-  [button timer]
-  (reset! (timeouts) (merge (timeouts) {button timer})))
-
-(defn add-timeout
+(defn -addTimeout
   "Adds new timeout / refreshes existing timeout."
-  [button]
+  [this button]
   (let [timer (Timer.)]
     (.start timer)
-    (add-timeout button timer)))
+    (.insertTimeout this button timer)))
 
-(defn get-timeout
+(defn -getTimeout
   "Get timer for button, or nil if nonexistent."
-  [button]
-  ((timeouts) button))
+  [this button]
+  ((.state this) button))
 
-(defn has-time-left
+(defn -hasTimeLeft
   "Returns whether or not there is time left in the button toggle."
-  ([button]
-   (has-time-left button const/TOGGLE_TIME))
-  ([button seconds]
-   (let [timer (get-timeout button)]
+  ([this button]
+   (.hasTimeLeft this button const/TOGGLE_TIME))
+  ([this button seconds]
+   (let [timer (.getTimeout this button)]
      (and timer (< (.get timer) seconds)))))
