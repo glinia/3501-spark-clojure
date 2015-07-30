@@ -1,7 +1,7 @@
 (ns elisabet.joystick
   (:gen-class
    :name joystick))
-(:require [elisabet.constants :as const])
+(require '[elisabet.constants :as const])
 
 (import edu.wpi.first.wpilibj.Joystick)
 

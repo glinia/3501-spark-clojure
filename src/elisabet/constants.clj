@@ -1,5 +1,6 @@
 (ns elisabet.constants
-  (:gen-class))
+  (:gen-class
+   :name constants))
 
 (import edu.wpi.first.wpilibj.DoubleSolenoid$Value)
 
