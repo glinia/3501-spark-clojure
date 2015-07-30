@@ -15,7 +15,7 @@
   [joystick direction]
   (= direction (.getPOV joystick)))
 
-(defn get
+(defn getb
   "Returns whether the button is currently pressed."
   [joystick button]
   (.getRawButton joystick button))
@@ -23,7 +23,7 @@
 (defn get-toggle-button
   "Returns whether the button is pressable AND if it's currently pressed."
   [[joystick toggle] button]
-  (let [pressed (and (get joystick button) (not (.hasTimeLeft toggle button)))]
+  (let [pressed (and (getb joystick button) (not (.hasTimeLeft toggle button)))]
     (if pressed
       (.addTimeout toggle button))))
 
@@ -36,7 +36,7 @@
 (defn get-one
   "Returns true if at least one of the buttons is pressed."
   [joystick & buttons]
-  (some get joystick buttons))
+  (some getb joystick buttons))
 
 (defn get-one-timed
   "Returns true if at least one of the buttons is on its timer."
