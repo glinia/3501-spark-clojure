@@ -88,8 +88,8 @@
   "Moves the arm based on input."
   []
   (util/log "running move-arm")
-  (let [arm-speed (arm/speed-from-joystick (- (.getY left-stick)))
-        coeff (if (joystick/getb left-stick 1) 0.2 1)
+  (let [arm-speed    (arm/speed-from-joystick (- (.getY left-stick)))
+        coeff        (if (joystick/getb left-stick 1) 0.2 1)
         adjust-speed (const/ARM_ADJUST_SPEED)
         left-button #(joystick/getb left-stick %)]
     (cond
