@@ -2,10 +2,11 @@
   (:gen-class
    :name robot
    :extends edu.wpi.first.wpilibj.IterativeRobot))
-(require '[elisabet.constants :as const]
+(require '[elisabet.constants  :as const]
          '[elisabet.drivetrain :as drivetrain]
-         '[elisabet.joystick :as joystick]
-         '[elisabet.toggle :as toggle])
+         '[elisabet.joystick   :as joystick]
+         '[elisabet.toggle     :as toggle]
+         '[elisabet.util       :as util])
 
 
 ;;; Initializers
@@ -13,7 +14,10 @@
 ;; joystick nonsense
 
 (defn init-joysticks
+  "Initialize joysticks and joystick-related stuff."
   []
+  (util/log "initing joysticks")
+
   (def left-toggle  (toggle.))
   (def right-toggle (toggle.))
 
@@ -31,7 +35,10 @@
 ;; drivetrain & mechanisms
 
 (defn init-drivetrain
+  "Initialize drivetrain."
   []
+  (util/log "initing drivetrain")
+
   (def base (drivetrain/make-drivetrain)))
 
 ;; method declaration
@@ -41,16 +48,19 @@
 ;;; FIRST methods
 
 ;; Gotta name FIRST uses in camelCase rather than kabob-case cause Java
+;; TEST WITH the method prefix "-" just added. See if it works.
 
-(defn robotInit
+(defn -robotInit
   "Run when the robot is powered on."
   []
+  (util/log "running robotInit")
   (init-joysticks)
   (init-drivetrain))
 
-(defn teleopPeriodic
+(defn -teleopPeriodic
   "Run approx every 20ms to communicate with driver station."
   []
+  (util/log "running teleopPeriodic")
   (drive))
 
 
@@ -59,6 +69,7 @@
 (defn- drive
   "Drive the robot!"
   []
+  (util/log (str "right y: " (.getY right-stick)))
   (drivetrain/drive base
                     (.getY right-stick)
                     (if (joystick/get-one right-stick 3 4 5 6)

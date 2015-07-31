@@ -4,6 +4,9 @@
 
 (import edu.wpi.first.wpilibj.DoubleSolenoid$Value)
 
+;; util
+(def ^:const LOG_FILE_PATH "~/FRC3501.log")
+
 ;; joystick control
 (def ^:const LEFT_JOYSTICK_PORT 0)
 (def ^:const RIGHT_JOYSTICK_PORT 1)
