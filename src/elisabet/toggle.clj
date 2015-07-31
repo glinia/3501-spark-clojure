@@ -7,8 +7,8 @@
              [getTimeout [Number] edu.wpi.first.wpilibj.Timer]
              [hasTimeLeft [Number] Boolean]
              [hasTimeLeft [Number Number] Boolean]]
-   :constructors {[] []}))
-(require '[elisabet.constants :as const])
+   :constructors {[] []})
+  (:require (elisabet [constants :as const])))
 
 (import edu.wpi.first.wpilibj.Timer)
 

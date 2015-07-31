@@ -1,7 +1,7 @@
 (ns elisabet.drivetrain
   (:gen-class
-   :name drivetrain))
-(require '[elisabet.constants :as const])
+   :name drivetrain)
+  (:require (elisabet [constants :as const])))
 
 (import (edu.wpi.first.wpilibj CANJaguar
                                RobotDrive))

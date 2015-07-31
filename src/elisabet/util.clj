@@ -1,7 +1,7 @@
 (ns elisabet.util
   (:gen-class
-   :name util))
-(require '[elisabet.constants :as const])
+   :name util)
+  (:require (elisabet [constants :as const])))
 
 (defn log
   "Logs to file with timestamp."

@@ -1,14 +1,13 @@
 (ns elisabet.robot
   (:gen-class
    :name robot
-   :extends edu.wpi.first.wpilibj.IterativeRobot))
-(require '[elisabet.arm        :as arm]
-         '[elisabet.constants  :as const]
-         '[elisabet.drivetrain :as drivetrain]
-         '[elisabet.joystick   :as joystick]
-         '[elisabet.toggle     :as toggle]
-         '[elisabet.util       :as util])
-
+   :extends edu.wpi.first.wpilibj.IterativeRobot)
+  (:require (elisabet [arm        :as arm]
+                      [constants  :as const]
+                      [drivetrain :as drivetrain]
+                      [joystick   :as joystick]
+                      [toggle     :as toggle]
+                      [util       :as util])))
 
 ;;; Initializers
 

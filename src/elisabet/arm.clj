@@ -1,7 +1,7 @@
 (ns elisabet.arm
   (:gen-class
-   :name arm))
-(require '[elisabet.constants :as const])
+   :name arm)
+  (:require (elisabet [constants :as const])))
 
 (import edu.wpi.first.wpilibj.CANJaguar)
 
