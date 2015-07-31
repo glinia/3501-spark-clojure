@@ -2,7 +2,8 @@
   (:gen-class
    :name robot
    :extends edu.wpi.first.wpilibj.IterativeRobot))
-(require '[elisabet.constants  :as const]
+(require '[elisabet.arm        :as arm]
+         '[elisabet.constants  :as const]
          '[elisabet.drivetrain :as drivetrain]
          '[elisabet.joystick   :as joystick]
          '[elisabet.toggle     :as toggle]
@@ -41,8 +42,15 @@
 
   (def base (drivetrain/make-drivetrain)))
 
+(defn init-arm
+  "Initialize arm winches."
+  []
+  (util/log "initing arm")
+
+  (def arm (arm/make-arm)))
+
 ;; method declaration
-(declare drive)
+(declare drive move-arm)
 
 
 ;;; FIRST methods
@@ -55,13 +63,13 @@
   []
   (util/log "running robotInit")
   (init-joysticks)
-  (init-drivetrain))
+  (init-drivetrain)) ; (init-arm)
 
 (defn -teleopPeriodic
   "Run approx every 20ms to communicate with driver station."
   []
   (util/log "running teleopPeriodic")
-  (drive))
+  (drive)) ; (move-arm)
 
 
 ;;; Helpers
@@ -75,3 +83,18 @@
                     (if (joystick/get-one right-stick 3 4 5 6)
                       0
                       (.getTwist right-stick))))
+
+(defn- move-arm
+  "Moves the arm based on input."
+  []
+  (util/log "running move-arm")
+  (let [arm-speed (arm/speed-from-joystick (- (.getY left-stick)))
+        coeff (if (joystick/getb left-stick 1) 0.2 1)
+        adjust-speed (const/ARM_ADJUST_SPEED)
+        left-button #(joystick/getb left-stick %)]
+    (cond
+      (left-button 7)  (arm/move-left arm adjust-speed)
+      (left-button 6)  (arm/move-left arm (- adjust-speed))
+      (left-button 11) (arm/move-right arm adjust-speed)
+      (left-button 10) (arm/move-right arm (- adjust-speed))
+      :else            (arm/move arm (* coeff arm-speed)))))
