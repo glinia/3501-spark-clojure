@@ -13,7 +13,7 @@
 
 ;; joystick nonsense
 
-(defn init-joysticks
+(defn- init-joysticks
   "Initialize joysticks and joystick-related stuff."
   []
   (util/log "initing joysticks")
@@ -34,7 +34,7 @@
 
 ;; drivetrain & mechanisms
 
-(defn init-drivetrain
+(defn- init-drivetrain
   "Initialize drivetrain."
   []
   (util/log "initing drivetrain")
