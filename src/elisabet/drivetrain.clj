@@ -21,8 +21,8 @@
 (defn drive
   "Drive using input from joysticks."
   [base forward twist]
-  (let [forward (filter-noise twist)
-        twist (filter-noise twist)]
+  (let [forward (filter-noise forward)
+        twist   (filter-noise twist)]
     (.arcadeDrive base (scale forward) (scale twist) false)))
 
 (defn drive-raw
@@ -50,4 +50,4 @@
 (defn- adjust
   "Outputs the average of `x` and `sqrt(x)`."
   [x]
-  (/ (+ x (* (Math/signum x) (Math/sqrt (Math/abs x)))) 2))
+  (-> (+ x (* (Math/signum x) (-> x Math/abs Math/sqrt))) (/ 2)))
