@@ -3,11 +3,14 @@
    :name robot
    :extends edu.wpi.first.wpilibj.IterativeRobot)
   (:require (elisabet [arm        :as arm]
+                      [auton      :as auton]
                       [constants  :as const]
                       [drivetrain :as drivetrain]
                       [joystick   :as joystick]
                       [toggle     :as toggle]
                       [util       :as util])))
+
+(import edu.wpi.first.wpilibj.Timer)
 
 ;;; Initializers
 
@@ -43,6 +46,15 @@
 
   (def arm (arm/make-arm)))
 
+;; auton
+
+(defn- init-auton
+  "Initialize timer for auton."
+  []
+  (util/log "initing auton")
+
+  (def auton-timer (Timer.)))
+
 ;; method declaration
 (declare drive move-arm)
 
@@ -57,13 +69,26 @@
   []
   (util/log "running robotInit")
   (init-joysticks)
-  (init-drivetrain)) ; (init-arm)
+  (init-drivetrain)) ; (init-arm) (init-auton)
 
 (defn -teleopPeriodic
   "Run approx every 20ms to communicate with driver station."
   []
   (util/log "running teleopPeriodic")
   (drive)) ; (move-arm)
+
+(defn -autonomousInit
+  "Start auton timer."
+  []
+  (util/log "running autonomousInit")
+  (.reset auton-timer)
+  (.start auton-timer))
+
+(defn -autonomousPeriodic
+  "Run during autonomous."
+  []
+  (util/log "running autonomousPeriodic")
+  (auton/drive-over-step auton-timer base))
 
 
 ;;; Helpers
