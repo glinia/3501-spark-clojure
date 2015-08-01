@@ -24,13 +24,8 @@
   (def left-stick  (joystick/make-joystick const/LEFT_JOYSTICK_PORT))
   (def right-stick (joystick/make-joystick const/RIGHT_JOYSTICK_PORT))
 
-  (defmacro left-stick-timer
-    []
-    '[left-stick left-toggle])
-
-  (defmacro right-stick-timer
-    []
-    '[right-stick right-toggle]))
+  (def left-stick-timer  [left-stick left-toggle])
+  (def right-stick-timer [right-stick right-toggle]))
 
 ;; drivetrain & mechanisms
 
