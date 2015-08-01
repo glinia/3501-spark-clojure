@@ -4,13 +4,13 @@
    :extends edu.wpi.first.wpilibj.IterativeRobot)
   (:require (elisabet [arm        :as arm]
                       [auton      :as auton]
+                      [claw       :as claw]
                       [constants  :as const]
                       [drivetrain :as drivetrain]
                       [joystick   :as joystick]
                       [toggle     :as toggle]
-                      [util       :as util])))
-
-(import edu.wpi.first.wpilibj.Timer)
+                      [util       :as util]))
+  (:import edu.wpi.first.wpilibj.Timer))
 
 ;;; Initializers
 
@@ -44,7 +44,14 @@
   []
   (util/log "initing arm")
 
-  (def arm (arm/make-arm)))
+  (def the-arm (arm/make-arm)))
+
+(defn init-claw
+  "Initialize claw."
+  []
+  (util/log "initing claw.")
+
+  (def the-claw (claw.)))
 
 ;; auton
 
@@ -56,7 +63,7 @@
   (def auton-timer (Timer.)))
 
 ;; method declaration
-(declare drive move-arm)
+(declare drive move-arm actuate-claw)
 
 
 ;;; FIRST methods
@@ -69,13 +76,13 @@
   []
   (util/log "running robotInit")
   (init-joysticks)
-  (init-drivetrain)) ; (init-arm) (init-auton)
+  (init-drivetrain)) ; (init-arm) (init-auton) (init-claw)
 
 (defn -teleopPeriodic
   "Run approx every 20ms to communicate with driver station."
   []
   (util/log "running teleopPeriodic")
-  (drive)) ; (move-arm)
+  (drive)) ; (move-arm) (actuate-claw)
 
 (defn -autonomousInit
   "Start auton timer."
@@ -97,6 +104,7 @@
   "Drive the robot!"
   []
   (util/log (str "right y: " (.getY right-stick)))
+
   (let [disable-twist (joystick/get-one right-stick 3 4 5 6)]
     (drivetrain/drive base
                       (.getY right-stick)
@@ -108,13 +116,33 @@
   "Moves the arm based on input."
   []
   (util/log "running move-arm")
+
   (let [arm-speed    (arm/speed-from-joystick (- (.getY left-stick)))
         adjust-speed (const/ARM_ADJUST_SPEED)
         left-button #(joystick/getb left-stick %)
         coeff        (if (left-button 1) 0.2 1)]
     (cond
-      (left-button 7)  (arm/move-left arm adjust-speed)
-      (left-button 6)  (arm/move-left arm (- adjust-speed))
-      (left-button 11) (arm/move-right arm adjust-speed)
-      (left-button 10) (arm/move-right arm (- adjust-speed))
-      :else            (arm/move arm (* coeff arm-speed)))))
+      (left-button 7)  (arm/move-left  the-arm adjust-speed)
+      (left-button 6)  (arm/move-left  the-arm (- adjust-speed))
+      (left-button 11) (arm/move-right the-arm adjust-speed)
+      (left-button 10) (arm/move-right the-arm (- adjust-speed))
+      :else            (arm/move       the-arm (* coeff arm-speed)))))
+
+(defn- actuate-claw
+  "Actuates claw based on input."
+  []
+  (util/log "running actuate claw.")
+
+  (when (= :FREE (claw/get-state the-claw))
+    (if (joystick/getb right-stick 1)
+      (claw/close the-claw)
+      (claw/open the-claw)))
+
+  (when (joystick/getb right-stick 2)
+    (claw/toggle-state))
+
+  (when (joystick/get-one right-stick 11 12)
+    (claw/turn-off the-claw))
+
+  (when (joystick/get-one right-stick 7 8)
+    (claw/turn-on the-claw)))

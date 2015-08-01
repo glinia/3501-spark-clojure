@@ -8,9 +8,8 @@
              [hasTimeLeft [Number] Boolean]
              [hasTimeLeft [Number Number] Boolean]]
    :constructors {[] []})
-  (:require (elisabet [constants :as const])))
-
-(import edu.wpi.first.wpilibj.Timer)
+  (:require (elisabet [constants :as const]))
+  (:import edu.wpi.first.wpilibj.Timer))
 
 (defn -init
   "Initialize with empty map."

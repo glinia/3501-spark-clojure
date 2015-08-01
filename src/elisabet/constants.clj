@@ -1,8 +1,7 @@
 (ns elisabet.constants
   (:gen-class
-   :name constants))
-
-(import edu.wpi.first.wpilibj.DoubleSolenoid$Value)
+   :name constants)
+  (:import edu.wpi.first.wpilibj.DoubleSolenoid$Value))
 
 ;; util
 (def ^:const LOG_FILE_PATH "~/FRC3501.log")
@@ -44,8 +43,5 @@
 (def ^:const CLAW_FORWARD_CHANNEL 0)
 (def ^:const CLAW_REVERSE_CHANNEL 1)
 
-(def ^:const OPEN DoubleSolenoid$Value/kForward)  ; might need to change import
-(def ^:const CLOSE DoubleSolenoid$Value/kReverse) ; to just DoubleSolenoid
-
-
-(def ^:const State {:FREE 0 :CLOSED 1})
+(def ^:const OPEN `DoubleSolenoid$Value/kForward)
+(def ^:const CLOSE `DoubleSolenoid$Value/kReverse)
