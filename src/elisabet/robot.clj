@@ -72,20 +72,21 @@
   "Drive the robot!"
   []
   (util/log (str "right y: " (.getY right-stick)))
-  (drivetrain/drive base
-                    (.getY right-stick)
-                    (if (joystick/get-one right-stick 3 4 5 6)
-                      0
-                      (.getTwist right-stick))))
+  (let [disable-twist (joystick/get-one right-stick 3 4 5 6)]
+    (drivetrain/drive base
+                      (.getY right-stick)
+                      (if disable-twist
+                        0
+                        (.getTwist right-stick)))))
 
 (defn- move-arm
   "Moves the arm based on input."
   []
   (util/log "running move-arm")
   (let [arm-speed    (arm/speed-from-joystick (- (.getY left-stick)))
-        coeff        (if (joystick/getb left-stick 1) 0.2 1)
         adjust-speed (const/ARM_ADJUST_SPEED)
-        left-button #(joystick/getb left-stick %)]
+        left-button #(joystick/getb left-stick %)
+        coeff        (if (left-button 1) 0.2 1)]
     (cond
       (left-button 7)  (arm/move-left arm adjust-speed)
       (left-button 6)  (arm/move-left arm (- adjust-speed))
