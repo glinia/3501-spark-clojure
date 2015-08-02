@@ -6,6 +6,7 @@
 (defn log
   "Logs to file with timestamp."
   [message]
-  (spit const/LOG_FILE_PATH
-        (str "[" (->> 1000 (/ (System/currentTimeMillis)) int) "] " message "\n")
-        :append true))
+  (let [timestamp (->> 1000 (/ (System/currentTimeMillis)) int)]
+    (spit const/LOG_FILE_PATH
+          (str "[" timestamp "] " message "\n")
+          :append true)))
