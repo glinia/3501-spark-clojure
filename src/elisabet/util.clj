@@ -7,5 +7,5 @@
   "Logs to file with timestamp."
   [message]
   (spit const/LOG_FILE_PATH
-        (str "[" (/ (System/currentTimeMillis) 1000) "] " message)
+        (str "[" (->> 1000 (/ (System/currentTimeMillis)) int) "] " message "\n")
         :append true))
