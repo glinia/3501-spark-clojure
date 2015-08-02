@@ -1,4 +1,4 @@
-(defproject elisabet "0.2.0-SNAPSHOT"
+(defproject elisabet "0.3.0-SNAPSHOT"
   :description "Clojure implementation of Turkey code for 2014-2015 FRC 3501"
   :url "https://github.com/glinia/3501-spark-clojure"
   :license {:name "GNU GPL v3"
