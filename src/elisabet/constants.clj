@@ -1,47 +1,50 @@
 (ns elisabet.constants
   (:gen-class
    :name constants)
+  (:require (elisabet [util :as util]))
   (:import edu.wpi.first.wpilibj.DoubleSolenoid$Value))
 
-;; util
-(def ^:const LOG_FILE_PATH "~/FRC3501.log")
+(util/def-consts
+  [;; util
+   LOG_FILE_PATH "~/FRC3501.log"
 
-;; joystick control
-(def ^:const LEFT_JOYSTICK_PORT 0)
-(def ^:const RIGHT_JOYSTICK_PORT 1)
+   ;; joystick control
+   LEFT_JOYSTICK_PORT  0
+   RIGHT_JOYSTICK_PORT 1
 
-(def ^:const TOGGLE_TIME 0.2)
-(def ^:const UP 0)
-(def ^:const UP_RIGHT 45)
-(def ^:const RIGHT 90)
-(def ^:const DOWN_RIGHT 135)
-(def ^:const DOWN 180)
-(def ^:const DOWN_LEFT 225)
-(def ^:const LEFT 270)
-(def ^:const UP_LEFT 315)
-(def ^:const NOT_PRESSED -1)
+   TOGGLE_TIME 0.2
 
-;; drivetrain
-(def ^:const MIN_DRIVE_JOYSTICK_INPUT 0.1)
+   UP          0
+   UP_RIGHT    45
+   RIGHT       90
+   DOWN_RIGHT  135
+   DOWN        180
+   DOWN_LEFT   225
+   LEFT        270
+   UP_LEFT     315
+   NOT_PRESSED -1
 
-(def ^:const MAX_DRIVE_SPEED 0.7)
+   ;; drivetrain
+   MIN_DRIVE_JOYSTICK_INPUT 0.1
 
-(def ^:const FRONT_LEFT_ADDRESS 4)
-(def ^:const FRONT_RIGHT_ADDRESS 5)
-(def ^:const REAR_LEFT_ADDRESS 3)
-(def ^:const REAR_RIGHT_ADDRESS 6)
+   MAX_DRIVE_SPEED 0.7
 
-;; winch & arm
-(def ^:const LEFT_WINCH_ADDRESS 2)
-(def ^:const RIGHT_WINCH_ADDRESS 7)
+   FRONT_LEFT_ADDRESS  4
+   FRONT_RIGHT_ADDRESS 5
+   REAR_LEFT_ADDRESS   3
+   REAR_RIGHT_ADDRESS  6
 
-(def ^:const ARM_ADJUST_SPEED 0.3)
+   ;; winch & arm
+   LEFT_WINCH_ADDRESS  2
+   RIGHT_WINCH_ADDRESS 7
 
-(def ^:const MIN_ARM_JOYSTICK_INPUT 0.1)
+   ARM_ADJUST_SPEED 0.3
 
-;; claw
-(def ^:const CLAW_FORWARD_CHANNEL 0)
-(def ^:const CLAW_REVERSE_CHANNEL 1)
+   MIN_ARM_JOYSTICK_INPUT 0.1
 
-(def ^:const OPEN `DoubleSolenoid$Value/kForward)
-(def ^:const CLOSE `DoubleSolenoid$Value/kReverse)
+   ;; claw
+   CLAW_FORWARD_CHANNEL 0
+   CLAW_REVERSE_CHANNEL 1
+
+   OPEN  `DoubleSolenoid$Value/kForward
+   CLOSE `DoubleSolenoid$Value/kReverse])
