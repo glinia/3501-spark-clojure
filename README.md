@@ -8,17 +8,26 @@ The name `elisabet` originated from the song [Elisabet](https://www.youtube.com/
 ### Setup
 
 Add the following to `~/.lein/profiles.clj`:
+
 ```clojure
 {:user {:plugins [[cider/cider-nrepl "0.10.0-SNAPSHOT"]]
         :dependencies [[org.clojure/tools.nrepl "0.2.7"]]}}
 ```
 
 Execute the following commands (replace `~/clojure/elisabet` with the path to this repository):
+
 ```bash
 cp ~/wpilib/java/current/lib/WPILib.jar ~/clojure/elisabet/resources/
 cp ~/wpilib/java/current/lib/WPILib-sources.jar ~/clojure/elisabet/resources/
 cp ~/wpilib/java/current/lib/NetworkTables.jar ~/clojure/elisabet/resources/
 cp ~/wpilib/java/current/lib/NetworkTables-sources.jar ~/clojure/elisabet/resources/
+```
+
+### Deploy
+
+```bash
+# creates uberjar and uploads to roborio at `roboRIO-3501.local`
+./deploy
 ```
 
 ### License
