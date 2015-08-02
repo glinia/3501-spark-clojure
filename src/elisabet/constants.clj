@@ -1,10 +1,23 @@
 (ns elisabet.constants
   (:gen-class
    :name constants)
-  (:require (elisabet [util :as util]))
   (:import edu.wpi.first.wpilibj.DoubleSolenoid$Value))
 
-(util/def-consts
+;;; following two macros adapted from https://gist.github.com/blacktaxi/1760333
+(defmacro def-const [const-name const-val]
+  `(def
+     ~(with-meta const-name
+        (assoc (meta const-name) :const true))
+     ~const-val))
+
+(defmacro def-consts [bindings]
+  `(do
+     ~@(map (fn [[const-name const-val]]
+              `(def-const ~const-name ~const-val))
+            (partition 2 bindings))))
+
+;;;; The Constants.
+(def-consts
   [;; util
    LOG_FILE_PATH "~/FRC3501.log"
 
