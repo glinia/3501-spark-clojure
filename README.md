@@ -1,4 +1,4 @@
-![Travis build status](https://travis-ci.org/glinia/3501-spark-clojure.svg?branch=master)
+[![Travis build status](https://travis-ci.org/glinia/3501-spark-clojure.svg?branch=master)](https://travis-ci.org/glinia/3501-spark-clojure)
 
 ### What is this?
 Clojure code for a simple [FIRST FRC](http://www.usfirst.org/roboticsprograms/frc) robot using the WPILib libraries for robot communication. As Clojure runs on the JVM, we can take advantage of those libraries with ease.
