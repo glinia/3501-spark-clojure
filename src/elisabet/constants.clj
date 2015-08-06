@@ -19,7 +19,7 @@
 ;;;; The Constants.
 (def-consts
   [;; util
-   LOG_FILE_PATH (str (System/getProperty "user.home") "/FRC3501.log")
+   LOG_FILE_PATH  "/home/lvuser/FRC3501.log"
 
    ;; joystick control
    LEFT_JOYSTICK_PORT  0

@@ -10,6 +10,19 @@ log_info () {
     echo "${yellow}[3501-deploy] ${green}$1${reset}"
 };
 
+send_command () {
+    ssh lvuser@roboRIO-3501.local $1
+};
+
+send_admin_command () {
+    # do we need a password for this?
+    ssh admin@roboRIO-3501.local $1
+};
+
+copy_file () {
+    scp $1 lvuser@roboRIO-3501.local:$2
+};
+
 # rm old uberjar
 log_info "removing old uberjar."
 rm -rf ./target/uberjar
@@ -20,6 +33,21 @@ lein uberjar
 
 # copy it over
 log_info "copying uberjar to robot..."
-scp ./target/uberjar/elisabet-*.jar lvuser@roboRIO-3501.local:/home/lvuser/FRCUserProgram.jar
+copy_file ./target/uberjar/elisabet-*.jar /home/lvuser/FRCUserProgram.jar
+
+# kill old code
+log_info "killing old code..."
+
+kill_netconsole="killall netconsole-host"
+send_admin_command $kill_netconsole
+
+# scp a bunch of files?
+
+# start new code
+log_info "launching new code..."
+
+kill_robot=". /etc/profile.d/natinst-path.sh; /usr/local/frc/bin/frcKillRobot.sh -t -r;"
+send_command $kill_robot
+
 
 log_info "excelsior!"
