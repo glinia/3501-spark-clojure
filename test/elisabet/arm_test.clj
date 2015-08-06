@@ -7,7 +7,7 @@
     (speed-from-joystick -0.01) => 0
     (speed-from-joystick 0)     => 0
     (speed-from-joystick 0.01)  => 0)
-  (fact "gives `value' for normal inputs `value'"
+  (fact "gives `value' for normal inputs `value'."
     (speed-from-joystick -1)   => -1
     (speed-from-joystick -0.4) => -0.4
     (speed-from-joystick 0.4)  => 0.4

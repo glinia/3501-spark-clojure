@@ -3,7 +3,7 @@
   (:require [elisabet.util :refer :all]))
 
 (fact "between"
-  (fact "works correctly"
+  (fact "succeeds properly."
     (between 0 -1 1) => truthy)
-  (fact "doesn't work correctly"
+  (fact "fails properly."
     (between 0 1 2) => falsey))
