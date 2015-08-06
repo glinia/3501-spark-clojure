@@ -16,7 +16,7 @@
   []
   [[] (atom {})])
 
-(defn- -insertTimeout
+(defn -insertTimeout
   "Insert timeout for button into map."
   [this button timer]
   (reset! (.state this) (merge @(.state this) {button timer})))
