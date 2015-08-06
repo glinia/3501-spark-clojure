@@ -7,5 +7,7 @@
                  [org.clojure/tools.namespace "0.2.11"]]
   :aot :all
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}}
+  :profiles {:uberjar {:aot :all}
+             :dev {:dependencies [[midje "1.7.0"]]
+                   :plugins [[lein-midje "3.1.3"]]}}
   :resource-paths ["resources/*"])
