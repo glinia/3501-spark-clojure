@@ -1,7 +1,8 @@
 (ns elisabet.auton
   (:gen-class
    :name auton)
-  (:require (elisabet [drivetrain :as drivetrain])))
+  (:require (elisabet [drivetrain :as drivetrain]
+                      [util       :as util])))
 
 (declare between drive run-for)
 
@@ -19,16 +20,9 @@
   [max-secs & exprs]
   `(let [~'secs     (.get ~'timer)
          ~'max-secs ~max-secs
-         ~'between #(between ~'secs %1 %2)
+         ~'between #(util/between ~'secs %1 %2)
          ~'time    #(* % ~'max-secs)]
      ~@exprs))
-
-(defn- between
-  "Returns value if value is between a and b, else nil"
-  [value a b]
-  (if (and (>= value a) (<= value b))
-    value
-    nil))
 
 (defn- drive
   "Move forward with a given power"

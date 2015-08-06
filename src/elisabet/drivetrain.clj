@@ -1,7 +1,8 @@
 (ns elisabet.drivetrain
   (:gen-class
    :name drivetrain)
-  (:require (elisabet [constants :as const])))
+  (:require (elisabet [constants :as const]
+                      [util      :as util])))
 
 (import (edu.wpi.first.wpilibj CANJaguar
                                RobotDrive))
@@ -38,6 +39,7 @@
 (defn- filter-noise
   "Ensures that the input is large enough to be recognized."
   [input]
+  (assert (util/between input -1 1) "Joystick input must be between -1 and 1.")
   (if (< (Math/abs input) const/MIN_DRIVE_JOYSTICK_INPUT)
     0
     input))

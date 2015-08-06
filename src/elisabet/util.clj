@@ -10,3 +10,10 @@
     (spit const/LOG_FILE_PATH
           (str "[" timestamp "] " message "\n")
           :append true)))
+
+(defn between
+  "Returns value if value is between a and b, else nil"
+  [value a b]
+  (if (and (>= value a) (<= value b))
+    value
+    nil))
