@@ -38,16 +38,15 @@ copy_file ./target/uberjar/elisabet-*.jar /home/lvuser/FRCUserProgram.jar
 # kill old code
 log_info "killing old code..."
 
-kill_netconsole="killall netconsole-host"
-send_admin_command $kill_netconsole
+send_admin_command "killall netconsole-host"
 
 # scp a bunch of files?
 
 # start new code
 log_info "launching new code..."
 
-kill_robot=". /etc/profile.d/natinst-path.sh; /usr/local/frc/bin/frcKillRobot.sh -t -r;"
-send_command $kill_robot
+restart_robot=". /etc/profile.d/natinst-path.sh; /usr/local/frc/bin/frcKillRobot.sh -t -r;"
+send_command $restart_robot
 
 
 log_info "excelsior!"
