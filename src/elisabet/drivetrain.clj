@@ -24,7 +24,7 @@
   [base forward twist]
   (let [forward (filter-noise forward)
         twist   (filter-noise twist)]
-    (.arcadeDrive base (scale forward) (scale twist) false)))
+    (drive-raw base (scale forward) (scale twist))))
 
 (defn drive-raw
   "Drive using without any adjustment."

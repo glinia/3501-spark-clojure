@@ -26,3 +26,7 @@ Add the following to `~/.lein/profiles.clj`:
 ### License
 
 This project is licensed under the [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) so that teams can share their discoveries and experiences in using Clojure with other teams, that everyone may gain. Clojure is a non-standard and unsupported language for the FIRST FRC competition, and as such the more examples the better.
+
+### Why
+
+[![I've just received word that the Emperor has dissolved the MIT computer science program permanently.](http://imgs.xkcd.com/comics/lisp_cycles.png)](https://xkcd.com/297/)
