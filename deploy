@@ -11,12 +11,12 @@ log_info () {
 };
 
 send_command () {
-    ssh lvuser@roboRIO-3501.local $1
+    ssh lvuser@roboRIO-3501.local "${1}"
 };
 
 send_admin_command () {
     # do we need a password for this?
-    ssh admin@roboRIO-3501.local $1
+    ssh admin:@roboRIO-3501.local "${1}"
 };
 
 copy_file () {
@@ -46,7 +46,7 @@ send_admin_command "killall netconsole-host"
 log_info "launching new code..."
 
 restart_robot=". /etc/profile.d/natinst-path.sh; /usr/local/frc/bin/frcKillRobot.sh -t -r;"
-send_command $restart_robot
+send_command "${restart_robot}"
 
 
 log_info "excelsior!"
