@@ -12,8 +12,6 @@
   :manifest {"Robot-Class" "elisabet.robot"
              "Class-Path"  "."}
   :filespecs [{:type :paths :paths ["resources/wpilibj"]}]
-
-  :aliases {"deploy" ["./deploy"]}
   :target-path "target/%s"
 
   :profiles {:uberjar {:aot :all}
