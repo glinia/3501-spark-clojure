@@ -9,7 +9,7 @@
 
   :aot :all
   :main edu.wpi.first.wpilibj.RobotBase
-  :manifest {"Robot-Class" "elisabet.robot"
+  :manifest {"Robot-Class" "robot"
              "Class-Path"  "."}
   :filespecs [{:type :paths :paths ["resources/wpilibj"]}]
   :target-path "target/%s"
