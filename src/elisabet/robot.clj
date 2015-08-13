@@ -73,27 +73,27 @@
 
 (defn -robotInit
   "Run when the robot is powered on."
-  []
+  [this]
   (util/log "running robotInit")
   (init-joysticks)
   (init-drivetrain)) ; (init-arm) (init-auton) (init-claw)
 
 (defn -teleopPeriodic
   "Run approx every 20ms to communicate with driver station."
-  []
+  [this]
   (util/log "running teleopPeriodic")
   (drive)) ; (move-arm) (actuate-claw)
 
 (defn -autonomousInit
   "Start auton timer."
-  []
+  [this]
   (util/log "running autonomousInit")
   (.reset auton-timer)
   (.start auton-timer))
 
 (defn -autonomousPeriodic
   "Run during autonomous."
-  []
+  [this]
   (util/log "running autonomousPeriodic")
   (auton/drive-over-step auton-timer base))
 
