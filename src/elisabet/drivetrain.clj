@@ -2,15 +2,12 @@
   (:gen-class
    :name drivetrain)
   (:require (elisabet [constants :as const]
-                      [util      :as util])))
+                      [util      :as util]))
+  (:import (edu.wpi.first.wpilibj CANJaguar
+                                  RobotDrive)))
 
-(import (edu.wpi.first.wpilibj CANJaguar
-                               RobotDrive))
-
-;; method declaration
 (declare drive drive-raw stop filter-noise scale adjust sign)
 
-;; begin
 (defn make-drivetrain
   []
   (RobotDrive.

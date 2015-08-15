@@ -19,8 +19,6 @@
 (defn- init-joysticks
   "Initialize joysticks and joystick-related stuff."
   []
-  (util/log "initing joysticks")
-
   (def left-toggle  (toggle.))
   (def right-toggle (toggle.))
 
@@ -35,22 +33,16 @@
 (defn- init-drivetrain
   "Initialize drivetrain."
   []
-  (util/log "initing drivetrain")
-
   (def base (drivetrain/make-drivetrain)))
 
 (defn init-arm
   "Initialize arm winches."
   []
-  (util/log "initing arm")
-
   (def the-arm (arm/make-arm)))
 
 (defn init-claw
   "Initialize claw."
   []
-  (util/log "initing claw.")
-
   (def the-claw (claw.)))
 
 ;; auton
@@ -58,43 +50,37 @@
 (defn- init-auton
   "Initialize timer for auton."
   []
-  (util/log "initing auton")
-
   (def auton-timer (Timer.)))
 
-;; method declaration
 (declare drive move-arm actuate-claw)
 
-
 ;;; FIRST methods
-
-;; Gotta name FIRST uses in camelCase rather than kabob-case cause Java
-;; TEST WITH the method prefix "-" just added. See if it works.
 
 (defn -robotInit
   "Run when the robot is powered on."
   [this]
-  (util/log "running robotInit")
   (init-joysticks)
-  (init-drivetrain)) ; (init-arm) (init-auton) (init-claw)
+  (init-drivetrain)
+  (init-arm)
+  (init-auton)
+  (init-claw))
 
 (defn -teleopPeriodic
   "Run approx every 20ms to communicate with driver station."
   [this]
-  (util/log "running teleopPeriodic")
-  (drive)) ; (move-arm) (actuate-claw)
+  (drive)
+  (move-arm)
+  (actuate-claw))
 
 (defn -autonomousInit
   "Start auton timer."
   [this]
-  (util/log "running autonomousInit")
   (.reset auton-timer)
   (.start auton-timer))
 
 (defn -autonomousPeriodic
   "Run during autonomous."
   [this]
-  (util/log "running autonomousPeriodic")
   (auton/drive-over-step auton-timer base))
 
 
@@ -103,8 +89,6 @@
 (defn- drive
   "Drive the robot!"
   []
-  (util/log (str "right y: " (.getY right-stick)))
-
   (let [disable-twist (joystick/get-one right-stick 3 4 5 6)]
     (drivetrain/drive base
                       (.getY right-stick)
@@ -115,8 +99,6 @@
 (defn- move-arm
   "Moves the arm based on input."
   []
-  (util/log "running move-arm")
-
   (let [arm-speed    (arm/speed-from-joystick (- (.getY left-stick)))
         adjust-speed (const/ARM_ADJUST_SPEED)
         left-button #(joystick/getb left-stick %)
@@ -131,8 +113,6 @@
 (defn- actuate-claw
   "Actuates claw based on input."
   []
-  (util/log "running actuate claw.")
-
   (when (= :FREE (claw/get-state the-claw))
     (if (joystick/getb right-stick 1)
       (claw/close the-claw)

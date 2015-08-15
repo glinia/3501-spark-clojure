@@ -4,7 +4,7 @@
   (:require (elisabet [drivetrain :as drivetrain]
                       [util       :as util])))
 
-(declare between drive run-for)
+(declare drive run-for)
 
 (defn drive-over-step
   "Drive over the step into the auton zone."
