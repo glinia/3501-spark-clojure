@@ -8,15 +8,15 @@
                                RobotDrive))
 
 ;; method declaration
-(declare drive drive-raw stop filter-noise scale adjust)
+(declare drive drive-raw stop filter-noise scale adjust sign)
 
 ;; begin
 (defn make-drivetrain
   []
   (RobotDrive.
    (CANJaguar. const/FRONT_LEFT_ADDRESS)
-   (CANJaguar. const/FRONT_RIGHT_ADDRESS)
    (CANJaguar. const/REAR_LEFT_ADDRESS)
+   (CANJaguar. const/FRONT_RIGHT_ADDRESS)
    (CANJaguar. const/REAR_RIGHT_ADDRESS)))
 
 (defn drive
@@ -52,4 +52,12 @@
 (defn- adjust
   "Outputs the average of `x` and `sqrt(x)`."
   [x]
-  (-> (+ x (* (Math/signum x) (-> x Math/abs Math/sqrt))) (/ 2)))
+  (-> (+ x (* (sign x) (-> x Math/abs Math/sqrt))) (/ 2)))
+
+(defn- sign
+  "Outputs -1, 0, 1 depending on sign of n"
+  [n]
+  (cond
+    (< n 0) -1
+    (> n 0) 1
+    :else 0))

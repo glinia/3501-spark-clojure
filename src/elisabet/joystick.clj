@@ -36,7 +36,7 @@
 (defn get-one
   "Returns true if at least one of the buttons is pressed."
   [joystick & buttons]
-  (some getb joystick buttons))
+  (some #(getb joystick %) buttons))
 
 (defn get-one-timed
   "Returns true if at least one of the buttons is on its timer."
