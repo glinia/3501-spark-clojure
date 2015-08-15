@@ -2,9 +2,8 @@
   (:gen-class
    :name arm)
   (:require (elisabet [constants :as const]
-                      [util      :as util])))
-
-(import edu.wpi.first.wpilibj.CANJaguar)
+                      [util      :as util]))
+  (:import edu.wpi.first.wpilibj.CANJaguar))
 
 (defn make-arm
   []
