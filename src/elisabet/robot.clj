@@ -12,8 +12,6 @@
                       [util       :as util]))
   (:import edu.wpi.first.wpilibj.Timer))
 
-;;; Initializers
-
 ;; joystick nonsense
 
 (defn- init-joysticks
@@ -28,30 +26,6 @@
   (def left-stick-timer  [left-stick left-toggle])
   (def right-stick-timer [right-stick right-toggle]))
 
-;; drivetrain & mechanisms
-
-(defn- init-drivetrain
-  "Initialize drivetrain."
-  []
-  (def base (drivetrain/make-drivetrain)))
-
-(defn init-arm
-  "Initialize arm winches."
-  []
-  (def the-arm (arm/make-arm)))
-
-(defn init-claw
-  "Initialize claw."
-  []
-  (def the-claw (claw.)))
-
-;; auton
-
-(defn- init-auton
-  "Initialize timer for auton."
-  []
-  (def auton-timer (Timer.)))
-
 (declare drive move-arm actuate-claw)
 
 ;;; FIRST methods
@@ -60,10 +34,10 @@
   "Run when the robot is powered on."
   [this]
   (init-joysticks)
-  (init-drivetrain)
-  (init-arm)
-  (init-auton)
-  (init-claw))
+  (def base (drivetrain/make-drivetrain))
+  (def the-arm (arm/make-arm))
+  (def the-claw (claw.))
+  (def auton-timer (Timer.)))
 
 (defn -teleopPeriodic
   "Run approx every 20ms to communicate with driver station."
