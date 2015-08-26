@@ -74,7 +74,7 @@
   "Moves the arm based on input."
   []
   (let [arm-speed    (arm/speed-from-joystick (- (.getY left-stick)))
-        adjust-speed (const/ARM_ADJUST_SPEED)
+        adjust-speed const/ARM_ADJUST_SPEED
         left-button #(joystick/getb left-stick %)
         coeff        (if (left-button 1) 0.2 1)]
     (cond
@@ -87,13 +87,14 @@
 (defn- actuate-claw
   "Actuates claw based on input."
   []
-  (when (= :FREE (claw/get-state the-claw))
+  (if (= :FREE (claw/get-state the-claw))
     (if (joystick/getb right-stick 1)
       (claw/close the-claw)
-      (claw/open the-claw)))
+      (claw/open the-claw))
+    (claw/close the-claw))
 
-  (when (joystick/getb right-stick 2)
-    (claw/toggle-state))
+  (when (joystick/get-toggle-button right-stick-timer 2)
+    (claw/toggle-state the-claw))
 
   (when (joystick/get-one right-stick 11 12)
     (claw/turn-off the-claw))

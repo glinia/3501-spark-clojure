@@ -1,7 +1,6 @@
 (ns elisabet.constants
   (:gen-class
-   :name constants)
-  (:import edu.wpi.first.wpilibj.DoubleSolenoid$Value))
+   :name constants))
 
 ;;; following two macros adapted from https://gist.github.com/blacktaxi/1760333
 (defmacro def-const [const-name const-val]
@@ -57,7 +56,4 @@
 
    ;; claw
    CLAW_FORWARD_CHANNEL 0
-   CLAW_REVERSE_CHANNEL 1
-
-   OPEN  `DoubleSolenoid$Value/kForward
-   CLOSE `DoubleSolenoid$Value/kReverse])
+   CLAW_REVERSE_CHANNEL 1])

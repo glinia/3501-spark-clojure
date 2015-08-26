@@ -6,7 +6,11 @@
    :constructors {[] []})
   (:require (elisabet [constants :as const]))
   (:import (edu.wpi.first.wpilibj Compressor
-                                  DoubleSolenoid)))
+                                  DoubleSolenoid
+                                  DoubleSolenoid$Value)))
+
+(def OPEN  DoubleSolenoid$Value/kForward)
+(def CLOSE DoubleSolenoid$Value/kReverse)
 
 (defn -init
   "Initialize claw, compressor, state."
@@ -31,12 +35,12 @@
 (defn open
   "Open claw."
   [claw]
-  (.set (:claw @(.state claw)) `~const/OPEN))
+  (.set (:claw @(.state claw)) OPEN))
 
 (defn close
   "Close claw."
   [claw]
-  (.set (:claw @(.state claw)) `~const/CLOSE))
+  (.set (:claw @(.state claw)) CLOSE))
 
 (defn actuate
   "Actuate claw based on state."
