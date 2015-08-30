@@ -9,6 +9,10 @@ The name `elisabet` originated from the song [Elisabet](https://www.youtube.com/
 
 ### Setup
 
+`git clone` the project. Install Leiningen.
+
+Edit the `./deploy` script and change "3501" to your team number.
+
 Add the following to `~/.lein/profiles.clj`:
 
 ```clojure
@@ -16,12 +20,16 @@ Add the following to `~/.lein/profiles.clj`:
         :dependencies [[org.clojure/tools.nrepl "0.2.7"]]}}
 ```
 
-### Deploy
+### Build and Deploy
 
 ```bash
 # creates uberjar and uploads to roborio at `roboRIO-3501.local`
 ./deploy
 ```
+
+###### IMPORTANT NOTES
+
+- Once the script says the deploy succeeded, you will have to wait 10-30 seconds for the "Robot Code" light on the Driver Station to go green.
 
 ### License
 
