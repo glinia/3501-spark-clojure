@@ -3,8 +3,7 @@
    :name toggle
    :state state
    :init init
-   :methods [[insertTimeout [Number edu.wpi.first.wpilibj.Timer] void]
-             [addTimeout [Number] void]
+   :methods [[addTimeout [Number] void]
              [getTimeout [Number] edu.wpi.first.wpilibj.Timer]
              [hasTimeLeft [Number] Boolean]
              [hasTimeLeft [Number Number] Boolean]]
@@ -17,7 +16,7 @@
   []
   [[] (atom {})])
 
-(defn -insertTimeout
+(defn insert-timeout
   "Insert timeout for button into map."
   [this button timer]
   (reset! (.state this) (merge @(.state this) {button timer})))
@@ -27,7 +26,7 @@
   [this button]
   (let [timer (Timer.)]
     (.start timer)
-    (.insertTimeout this button timer)))
+    (insert-timeout this button timer)))
 
 (defn -getTimeout
   "Get timer for button, or nil if nonexistent."

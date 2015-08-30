@@ -4,7 +4,8 @@
    :state state
    :init init
    :constructors {[] []})
-  (:require (elisabet [constants :as const]))
+  (:require (elisabet [constants :as const]
+                      [util      :as util]))
   (:import (edu.wpi.first.wpilibj Compressor
                                   DoubleSolenoid
                                   DoubleSolenoid$Value)))

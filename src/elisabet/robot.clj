@@ -87,11 +87,11 @@
 (defn- actuate-claw
   "Actuates claw based on input."
   []
-  (if (= :FREE (claw/get-state the-claw))
-    (if (joystick/getb right-stick 1)
-      (claw/close the-claw)
-      (claw/open the-claw))
-    (claw/close the-claw))
+  (case (claw/get-state the-claw)
+    :FREE   (if (joystick/getb right-stick 1)
+              (claw/close the-claw)
+              (claw/open the-claw))
+    :CLOSED (claw/close the-claw))
 
   (when (joystick/get-toggle-button right-stick-timer 2)
     (claw/toggle-state the-claw))

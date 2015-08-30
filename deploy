@@ -15,8 +15,10 @@ send_command () {
 };
 
 send_admin_command () {
-    # do we need a password for this?
-    ssh admin:@roboRIO-3501.local "${1}"
+    echo "============"
+    echo "PRESS ENTER for next section (no password)"
+    echo "============"
+    ssh admin@roboRIO-3501.local "${1}"
 };
 
 copy_file () {

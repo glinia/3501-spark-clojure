@@ -23,8 +23,9 @@
   "Returns whether the button is pressable AND if it's currently pressed."
   [[joystick toggle] button]
   (let [pressed (and (getb joystick button) (not (.hasTimeLeft toggle button)))]
-    (if pressed
-      (.addTimeout toggle button))))
+    (when pressed
+      (.addTimeout toggle button))
+    pressed))
 
 (defn get-timed-action
   "Check if there is time remaining in the button press timer."
